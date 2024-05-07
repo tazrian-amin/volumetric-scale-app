@@ -5,11 +5,11 @@ import pandas as pd
 
 # Sidebar for user inputs
 st.sidebar.header("Configuration")
-belt_width = st.sidebar.number_input('Belt Width (m)', min_value=0.0)
-velocity = st.sidebar.number_input('Velocity (m/s)', min_value=0.0)
-sensor_speed = st.sidebar.number_input('Sensor Speed (fps)', min_value=0.0, step=1)
-sensor_height = st.sidebar.number_input('Sensor Height (m)', min_value=0.0)
-sensor_cnt = st.sidebar.number_input('Number of Sensors', min_value=0, step=1)
+belt_width = st.sidebar.number_input('Belt Width (m)', min_value=0.0, value=1.0)
+velocity = st.sidebar.number_input('Velocity (m/s)', min_value=0.0, value=1.0)
+sensor_speed = st.sidebar.number_input('Sensor Speed (fps)', min_value=0, value=100, step=1)
+sensor_height = st.sidebar.number_input('Sensor Height (m)', min_value=0.0, value=1.0)
+sensor_cnt = st.sidebar.number_input('Number of Sensors', min_value=0, value=100, step=1)
 
 st.title("Volumetric Scale")
 
@@ -38,7 +38,7 @@ if st.button('Start Calculation'):
 
     # Simulate sensor data generation
     while True:
-        time.sleep(1)  # slow down the loop for visibility
+        #time.sleep(1)  # slow down the loop for visibility
         heights = sensor_height - np.random.rand(sensor_cnt)
         heights_data.append(heights.mean())  # Store mean height for visualization
 
