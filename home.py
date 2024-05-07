@@ -7,13 +7,13 @@ import pandas as pd
 st.sidebar.header("Configuration")
 belt_width = st.sidebar.number_input('Belt Width (m)', min_value=0.0)
 velocity = st.sidebar.number_input('Velocity (m/s)', min_value=0.0)
-sensor_speed = st.sidebar.number_input('Sensor Speed (fps)', min_value=0.0)
+sensor_speed = st.sidebar.number_input('Sensor Speed (fps)', min_value=0.0, step=1)
 sensor_height = st.sidebar.number_input('Sensor Height (m)', min_value=0.0)
 sensor_cnt = st.sidebar.number_input('Number of Sensors', min_value=0, step=1)
 
 st.title("Volumetric Scale")
 
-# Use columns to make charts responsive and more distinct
+# Columns to make charts responsive and more distinct
 col1, spacer, col2 = st.columns([5, 1, 5])  # Adjust the middle column width for spacing
 
 with col1:
@@ -41,9 +41,9 @@ if st.button('Start Calculation'):
         time.sleep(1)  # slow down the loop for visibility
         heights = sensor_height - np.random.rand(sensor_cnt)
         heights_data.append(heights.mean())  # Store mean height for visualization
-        new_volume = 0
+
         for i in range(sensor_cnt - 1):
-            new_volume += dx * dy * (heights[i] + heights[i+1] + prev_heights[i] + prev_heights[i+1]) / 4
+            new_volume = dx * dy * (heights[i] + heights[i+1] + prev_heights[i] + prev_heights[i+1]) / 4
         volume += new_volume
         volumes.append(volume)
         prev_heights = heights
