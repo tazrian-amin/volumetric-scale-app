@@ -38,13 +38,13 @@ if st.button('Start Calculation'):
 
     # Simulate sensor data generation
     while True:
-        #time.sleep(1)  # slow down the loop for visibility
+        time.sleep(1)  # slow down the loop for visibility
         heights = sensor_height - np.random.rand(sensor_cnt)
         heights_data.append(heights.mean())  # Store mean height for visualization
 
         for i in range(sensor_cnt - 1):
             new_volume = dx * dy * (heights[i] + heights[i+1] + prev_heights[i] + prev_heights[i+1]) / 4
-        volume += new_volume
+            volume += new_volume
         volumes.append(volume)
         prev_heights = heights
 
@@ -55,4 +55,4 @@ if st.button('Start Calculation'):
         height_chart.line_chart(heights_df)
 
         # Update the text element with the latest volume
-        latest_volume_text.text(f"Volume: {volume} m³")
+        latest_volume_text.metric(label="Total Volume (m³)", value=volume)
